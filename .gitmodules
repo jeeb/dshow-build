@@ -1,0 +1,9 @@
+[submodule "ffdshow-tryouts"]
+	path = ffdshow-tryouts
+	url = git://github.com/jeeb/ffdshow-tryouts.git
+[submodule "lavfsplitter"]
+	path = lavfsplitter
+	url = git://github.com/Nevcairiel/LAVFSplitter.git
+[submodule "mpc-hc"]
+	path = mpc-hc
+	url = git://github.com/jeeb/mpc-hc.git
