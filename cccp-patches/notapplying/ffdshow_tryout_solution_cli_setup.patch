@@ -1,0 +1,14 @@
+Index: ffdshow_2008.sln
+===================================================================
+--- ffdshow_2008.sln	(revision 3345)
++++ ffdshow_2008.sln	(working copy)
+@@ -25,9 +25,6 @@
+ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FLT_ffdshow", "dscaler\FLT_ffdshow_2008.vcproj", "{F196E6C7-B12F-4F8E-BAB7-A448CBA0B278}"
+ EndProject
+ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ff_vfw", "ffvfw\ff_vfw_2008.vcproj", "{1EBF3292-5911-4B07-A06C-E33A72CD62EB}"
+-	ProjectSection(ProjectDependencies) = postProject
+-		{30A21C7F-035D-41E2-95BE-B4FFA5F5176B} = {30A21C7F-035D-41E2-95BE-B4FFA5F5176B}
+-	EndProjectSection
+ EndProject
+ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ff_acm", "ffacm\ff_acm_2008.vcproj", "{C1C425CE-7550-4592-B04C-154FAC46B4C2}"
+ EndProject

@@ -1,0 +1,88 @@
+Index: include/SubWCRev.h
+===================================================================
+--- include/SubWCRev.h	(revision 2503)
++++ include/SubWCRev.h	(working copy)
+@@ -1 +1,6 @@
+ #define VERSION_REV $WCREV$
++
++#define ACTUAL_BUILD_YEAR "$WCNOW=%Y$"
++#define ACTUAL_BUILD_MONTH "$WCNOW=%m$"
++#define ACTUAL_BUILD_DAY "$WCNOW=%d$"
++#define ACTUAL_BUILD_TIME "$WCNOW=%X$"
+Index: src/apps/mplayerc/mpciconlib/mpciconlib.rc
+===================================================================
+--- src/apps/mplayerc/mpciconlib/mpciconlib.rc	(revision 2503)
++++ src/apps/mplayerc/mpciconlib/mpciconlib.rc	(working copy)
+@@ -119,12 +119,13 @@
+             VALUE "Comments", "Media Player Classic - Home Cinema Icon Library"
+             VALUE "CompanyName", "MPC-HC Team"
+             VALUE "FileDescription", "Media Player Classic - Home Cinema Icon Library"
+-            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", 0, 0 "
++            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) ".0.0\0"
+             VALUE "InternalName", "mpciconlib"
+             VALUE "LegalCopyright", "2002-2010 see AUTHORS file"
+             VALUE "OriginalFilename", "mpciconlib.dll"
+             VALUE "ProductName", "Media Player Classic - Home Cinema Icon Library"
+-            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", 0, 0 "
++            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) ".0.0\0"
++            VALUE "SpecialBuild", "CCCP " ACTUAL_BUILD_YEAR "-" ACTUAL_BUILD_MONTH "-" ACTUAL_BUILD_DAY " " ACTUAL_BUILD_TIME "\0"
+         END
+     END
+     BLOCK "VarFileInfo"
+Index: src/apps/mplayerc/mpciconlib/mpciconlib.vcproj
+===================================================================
+--- src/apps/mplayerc/mpciconlib/mpciconlib.vcproj	(revision 2634)
++++ src/apps/mplayerc/mpciconlib/mpciconlib.vcproj	(working copy)
+@@ -53,7 +53,7 @@
+ 			/>
+ 			<Tool
+ 				Name="VCResourceCompilerTool"
+-				PreprocessorDefinitions="_UNICODE;UNICODE;NO_VERSION_REV_NEEDED"
++				PreprocessorDefinitions="_UNICODE;UNICODE"
+ 			/>
+ 			<Tool
+ 				Name="VCPreLinkEventTool"
+@@ -126,7 +126,7 @@
+ 			/>
+ 			<Tool
+ 				Name="VCResourceCompilerTool"
+-				PreprocessorDefinitions="_UNICODE;UNICODE;NO_VERSION_REV_NEEDED"
++				PreprocessorDefinitions="_UNICODE;UNICODE"
+ 			/>
+ 			<Tool
+ 				Name="VCPreLinkEventTool"
+Index: src/apps/mplayerc/res/mplayerc.rc2
+===================================================================
+--- src/apps/mplayerc/res/mplayerc.rc2	(revision 2503)
++++ src/apps/mplayerc/res/mplayerc.rc2	(working copy)
+@@ -147,12 +147,13 @@
+             VALUE "Comments", "Based on the original Media Player Classic v6.4.9.0 (C) Gabest"
+             VALUE "CompanyName", "MPC-HC Team"
+             VALUE "FileDescription", "Media Player Classic - Home Cinema"
+-            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
++            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
+             VALUE "InternalName", "mpc-hc"
+             VALUE "LegalCopyright", "2002-2010 see: http://mpc-hc.svn.sourceforge.net/viewvc/mpc-hc/trunk/src/apps/mplayerc/Authors.txt"
+             VALUE "OriginalFilename", "mpc-hc.exe"
+             VALUE "ProductName", "Media Player Classic - Home Cinema"
+-            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
++            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
++            VALUE "SpecialBuild", "CCCP " ACTUAL_BUILD_YEAR "-" ACTUAL_BUILD_MONTH "-" ACTUAL_BUILD_DAY " " ACTUAL_BUILD_TIME "\0"
+         END
+     END
+     BLOCK "VarFileInfo"
+Index: update_version.bat
+===================================================================
+--- update_version.bat	(revision 2503)
++++ update_version.bat	(working copy)
+@@ -6,5 +6,9 @@
+ 
+ :NoSubWCRev
+ ECHO:NoSubWCRev
+-ECHO:#define VERSION_REV 0 > include\Version_rev.h
++ECHO:#define VERSION_REV 0              >  include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_YEAR 2010     >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_MONTH 1       >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_DAY 1         >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_TIME 00:00:00 >> include\Version_rev.h
+ COPY /Y src\apps\mplayerc\res\mpc-hc.exe.manifest.template src\apps\mplayerc\res\mpc-hc.exe.manifest

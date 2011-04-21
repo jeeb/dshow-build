@@ -1,0 +1,124 @@
+Index: src/filters/transform/BaseVideoFilter/BaseVideoFilter.cpp
+===================================================================
+--- src/filters/transform/BaseVideoFilter/BaseVideoFilter.cpp	(revision 2008)
++++ src/filters/transform/BaseVideoFilter/BaseVideoFilter.cpp	(working copy)
+@@ -483,39 +483,27 @@
+ 		: NOERROR;
+ }
+ 
+-
+-VIDEO_OUTPUT_FORMATS DefaultFormats[] =
+-{
+-	{&MEDIASUBTYPE_YV12, 3, 12, '21VY'},
+-	{&MEDIASUBTYPE_I420, 3, 12, '024I'},
+-	{&MEDIASUBTYPE_IYUV, 3, 12, 'VUYI'},
+-	{&MEDIASUBTYPE_YUY2, 1, 16, '2YUY'},
+-	{&MEDIASUBTYPE_ARGB32, 1, 32, BI_RGB},
+-	{&MEDIASUBTYPE_RGB32, 1, 32, BI_RGB},
+-	{&MEDIASUBTYPE_RGB24, 1, 24, BI_RGB},
+-	{&MEDIASUBTYPE_RGB565, 1, 16, BI_RGB},
+-	{&MEDIASUBTYPE_RGB555, 1, 16, BI_RGB},
+-	{&MEDIASUBTYPE_ARGB32, 1, 32, BI_BITFIELDS},
+-	{&MEDIASUBTYPE_RGB32, 1, 32, BI_BITFIELDS},
+-	{&MEDIASUBTYPE_RGB24, 1, 24, BI_BITFIELDS},
+-	{&MEDIASUBTYPE_RGB565, 1, 16, BI_BITFIELDS},
+-	{&MEDIASUBTYPE_RGB555, 1, 16, BI_BITFIELDS},
+-};
+-
+-void CBaseVideoFilter::GetOutputFormats (int& nNumber, VIDEO_OUTPUT_FORMATS** ppFormats)
+-{
+-	nNumber		= countof(DefaultFormats);
+-	*ppFormats	= DefaultFormats;
+-}
+-
+-
+ HRESULT CBaseVideoFilter::GetMediaType(int iPosition, CMediaType* pmt)
+ {
+-	VIDEO_OUTPUT_FORMATS*	fmts;
+-	int						nFormatCount;
+-
+     if(m_pInput->IsConnected() == FALSE) return E_UNEXPECTED;
+ 
++	struct {const GUID* subtype; WORD biPlanes, biBitCount; DWORD biCompression;} fmts[] =
++	{
++		{&MEDIASUBTYPE_YV12, 3, 12, '21VY'},
++		{&MEDIASUBTYPE_I420, 3, 12, '024I'},
++		{&MEDIASUBTYPE_IYUV, 3, 12, 'VUYI'},
++		{&MEDIASUBTYPE_YUY2, 1, 16, '2YUY'},
++		{&MEDIASUBTYPE_ARGB32, 1, 32, BI_RGB},
++		{&MEDIASUBTYPE_RGB32, 1, 32, BI_RGB},
++		{&MEDIASUBTYPE_RGB24, 1, 24, BI_RGB},
++		{&MEDIASUBTYPE_RGB565, 1, 16, BI_RGB},
++		{&MEDIASUBTYPE_RGB555, 1, 16, BI_RGB},
++		{&MEDIASUBTYPE_ARGB32, 1, 32, BI_BITFIELDS},
++		{&MEDIASUBTYPE_RGB32, 1, 32, BI_BITFIELDS},
++		{&MEDIASUBTYPE_RGB24, 1, 24, BI_BITFIELDS},
++		{&MEDIASUBTYPE_RGB565, 1, 16, BI_BITFIELDS},
++		{&MEDIASUBTYPE_RGB555, 1, 16, BI_BITFIELDS},
++	};
+ 
+ 	// this will make sure we won't connect to the old renderer in dvd mode
+ 	// that renderer can't switch the format dynamically
+@@ -530,9 +518,9 @@
+ 		iPosition = iPosition*2;
+ 
+ 	//
+-	GetOutputFormats (nFormatCount, &fmts);
++
+ 	if(iPosition < 0) return E_INVALIDARG;
+-	if(iPosition >= 2*nFormatCount) return VFW_S_NO_MORE_ITEMS;
++	if(iPosition >= 2*countof(fmts)) return VFW_S_NO_MORE_ITEMS;
+ 
+ 	pmt->majortype = MEDIATYPE_Video;
+ 	pmt->subtype = *fmts[iPosition/2].subtype;
+@@ -581,22 +569,6 @@
+ 
+ 	CorrectMediaType(pmt);
+ 
+-	// copy source and target rectangles from input pin
+-	CMediaType&		pmtInput	= m_pInput->CurrentMediaType();
+-	VIDEOINFOHEADER* vih      = (VIDEOINFOHEADER*)pmt->Format();
+-	VIDEOINFOHEADER* vihInput = (VIDEOINFOHEADER*)pmtInput.Format();
+-
+-	if (vih && vihInput && (vihInput->rcSource.right != 0) && (vihInput->rcSource.bottom != 0))
+-	{
+-		vih->rcSource = vihInput->rcSource;
+-		vih->rcTarget = vihInput->rcTarget;
+-	}
+-	else
+-	{
+-		vih->rcSource.right  = vih->rcTarget.right  = m_win;
+-		vih->rcSource.bottom = vih->rcTarget.bottom = m_hin;
+-	}
+-
+ 	if (RealWidth != -1 && vih->rcSource.right > RealWidth)
+ 		vih->rcSource.right = RealWidth;
+ 	if (RealHeight != -1 && vih->rcSource.bottom > RealHeight)
+Index: src/filters/transform/BaseVideoFilter/BaseVideoFilter.h
+===================================================================
+--- src/filters/transform/BaseVideoFilter/BaseVideoFilter.h	(revision 2008)
++++ src/filters/transform/BaseVideoFilter/BaseVideoFilter.h	(working copy)
+@@ -21,15 +21,6 @@
+ 
+ #pragma once
+ 
+-
+-typedef struct
+-{
+-	const GUID*		subtype;
+-	WORD			biPlanes;
+-	WORD			biBitCount;
+-	DWORD			biCompression;
+-} VIDEO_OUTPUT_FORMATS;
+-
+ class CBaseVideoFilter : public CTransformFilter
+ {
+ private:
+@@ -53,7 +44,6 @@
+ 	virtual void GetOutputSize(int& w, int& h, int& arx, int& ary, int &RealWidth, int &RealHeight) {}
+ 	virtual HRESULT Transform(IMediaSample* pIn) = 0;
+ 	virtual bool IsVideoInterlaced() {return false;}
+-	virtual void GetOutputFormats (int& nNumber, VIDEO_OUTPUT_FORMATS** ppFormats);
+ 
+ public:
+ 	CBaseVideoFilter(TCHAR* pName, LPUNKNOWN lpunk, HRESULT* phr, REFCLSID clsid, long cBuffers = 1);

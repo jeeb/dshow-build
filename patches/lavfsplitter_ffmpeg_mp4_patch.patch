@@ -1,0 +1,25 @@
+diff --git a/libavformat/mov.c b/libavformat/mov.c
+index 61ceaac..f5ce59c 100644
+--- a/libavformat/mov.c
++++ b/libavformat/mov.c
+@@ -2027,7 +2027,7 @@ static int mov_read_trun(MOVContext *c, AVIOContext *pb, MOVAtom atom)
+     av_dlog(c->fc, "flags 0x%x entries %d\n", flags, entries);
+     if (flags & 0x001) data_offset        = avio_rb32(pb);
+     if (flags & 0x004) first_sample_flags = avio_rb32(pb);
+-    if (flags & 0x800) {
++    if ((flags & 0x800) || sc->ctts_count) {
+         MOVStts *ctts_data;
+         if ((uint64_t)entries+sc->ctts_count >= UINT_MAX/sizeof(*sc->ctts_data))
+             return -1;
+@@ -2050,9 +2050,9 @@ static int mov_read_trun(MOVContext *c, AVIOContext *pb, MOVAtom atom)
+         if (flags & 0x100) sample_duration = avio_rb32(pb);
+         if (flags & 0x200) sample_size     = avio_rb32(pb);
+         if (flags & 0x400) sample_flags    = avio_rb32(pb);
+-        if (flags & 0x800) {
++        if ((flags & 0x800) || sc->ctts_count) {
+             sc->ctts_data[sc->ctts_count].count = 1;
+-            sc->ctts_data[sc->ctts_count].duration = avio_rb32(pb);
++            sc->ctts_data[sc->ctts_count].duration = (flags & 0x800) ? avio_rb32(pb) : 0;
+             sc->ctts_count++;
+         }
+         if ((keyframe = st->codec->codec_type == AVMEDIA_TYPE_AUDIO ||

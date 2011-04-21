@@ -1,0 +1,56 @@
+Index: src/apps/mplayerc/AppSettings.cpp
+===================================================================
+--- src/apps/mplayerc/AppSettings.cpp	(revision 2503)
++++ src/apps/mplayerc/AppSettings.cpp	(working copy)
+@@ -768,7 +768,7 @@
+ 		fLoopForever = !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_LOOP, 0);
+ 		fRewind = !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_REWIND, FALSE);
+ 		iZoomLevel = pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_ZOOM, 1);
+-		iDSVideoRendererType = pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_DSVIDEORENDERERTYPE, (IsVistaOrAbove() ? (CMPlayerCApp::HasEVR() ? VIDRNDT_DS_EVR_CUSTOM : VIDRNDT_DS_DEFAULT) : VIDRNDT_DS_OVERLAYMIXER) );
++		iDSVideoRendererType = pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_DSVIDEORENDERERTYPE, (IsVistaOrAbove() ? (((GetRenderersData()->GetD3X9Dll() != NULL) && CMPlayerCApp::HasEVR()) ? VIDRNDT_DS_EVR_CUSTOM : VIDRNDT_DS_DEFAULT) : VIDRNDT_DS_OVERLAYMIXER) );
+ 		iRMVideoRendererType = pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_RMVIDEORENDERERTYPE, VIDRNDT_RM_DEFAULT);
+ 		iQTVideoRendererType = pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_QTVIDEORENDERERTYPE, VIDRNDT_QT_DEFAULT);
+ 
+@@ -831,7 +831,7 @@
+ 
+ 		AudioRendererDisplayName = pApp->GetProfileString(IDS_R_SETTINGS, IDS_RS_AUDIORENDERERTYPE, _T(""));
+ 		fAutoloadAudio = !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_AUTOLOADAUDIO, TRUE);
+-		fAutoloadSubtitles = !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_AUTOLOADSUBTITLES, !CMPlayerCApp::IsVSFilterInstalled() || (IsVistaOrAbove() && CMPlayerCApp::HasEVR()) );
++		fAutoloadSubtitles = !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_AUTOLOADSUBTITLES, !CMPlayerCApp::IsVSFilterInstalled());
+ 		m_subtitlesLanguageOrder = pApp->GetProfileString(IDS_R_SETTINGS, IDS_RS_SUBTITLESLANGORDER, _T(""));
+ 		m_audiosLanguageOrder = pApp->GetProfileString(IDS_R_SETTINGS, IDS_RS_AUDIOSLANGORDER, _T(""));
+ 		fBlockVSFilter = !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_BLOCKVSFILTER, TRUE);
+@@ -1104,10 +1104,10 @@
+ 
+ 		Formats.UpdateData(false);
+ 
+-		SrcFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_SRCFILTERS, ~0);
+-		TraFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_TRAFILTERS, ~0);
+-		DXVAFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_DXVAFILTERS, ~0);
+-		FFmpegFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_FFMPEGFILTERS, ~0);
++		SrcFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_SRCFILTERS, ~0^SRC_AVI^SRC_MATROSKA^SRC_MP4^SRC_MPA^SRC_MPEG^SRC_OGG);
++		TraFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_TRAFILTERS, ~0^TRA_AAC^TRA_AC3^TRA_DTS^TRA_LPCM^TRA_MPA^TRA_VORBIS^TRA_FLAC^TRA_NELLY^TRA_AMR^TRA_MPEG1);
++		DXVAFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_DXVAFILTERS, ~0^DXVA_MPEG2^DXVA_H264^DXVA_VC1);
++		FFmpegFilters = pApp->GetProfileInt(IDS_R_INTERNAL_FILTERS, IDS_RS_FFMPEGFILTERS, ~0^FFM_H264^FFM_VC1^FFM_XVID^FFM_DIVX^FFM_MSMPEG4^FFM_FLV4^FFM_VP62^FFM_VP8^FFM_WMV^FFM_SVQ3^FFM_H263^FFM_AMVV^FFM_THEORA);
+ 
+ 		logofn = pApp->GetProfileString(IDS_R_SETTINGS, IDS_RS_LOGOFILE, _T(""));
+ 		logoid = pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_LOGOID, IDF_LOGO1);
+@@ -1248,7 +1248,7 @@
+ 		m_bToggleShaderScreenSpace = pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_TOGGLESHADERSSCREENSPACE, 0);
+ 
+ 		m_RenderersSettings.iEvrBuffers		= pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_EVR_BUFFERS, 5);
+-		fShowOSD		= !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_SHOWOSD, 1);
++		fShowOSD		= !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_SHOWOSD, 0);
+ 		fEnableEDLEditor= !!pApp->GetProfileInt(IDS_R_SETTINGS, IDS_RS_ENABLEEDLEDITOR, FALSE);
+ 
+ 		// Save analog capture settings
+Index: src/apps/mplayerc/mplayerc.h
+===================================================================
+--- src/apps/mplayerc/mplayerc.h	(revision 2503)
++++ src/apps/mplayerc/mplayerc.h	(working copy)
+@@ -166,3 +166,5 @@
+ #define AfxGetMyApp() static_cast<CMPlayerCApp*>(AfxGetApp())
+ #define AfxGetAppSettings() static_cast<CMPlayerCApp*>(AfxGetApp())->m_s
+ #define AppSettings CAppSettings
++
++CRenderersSettings&	GetRenderersSettings();

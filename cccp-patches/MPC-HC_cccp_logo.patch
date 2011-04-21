@@ -1,0 +1,26 @@
+Index: src/apps/mplayerc/PPageLogo.cpp
+===================================================================
+--- src/apps/mplayerc/PPageLogo.cpp	(revision 2193)
++++ src/apps/mplayerc/PPageLogo.cpp	(working copy)
+@@ -40,6 +40,8 @@
+ 	m_logoids.AddTail(IDF_LOGO1);
+ 	m_logoids.AddTail(IDF_LOGO2);
+ 	m_logoids.AddTail(IDF_LOGO3);
++	m_logoids.AddTail(IDF_LOGO8);
++	m_logoids.AddTail(IDF_LOGO9);
+ }
+ 
+ CPPageLogo::~CPPageLogo()
+Index: src/apps/mplayerc/res/mplayerc.rc2
+===================================================================
+--- src/apps/mplayerc/res/mplayerc.rc2	(revision 2193)
++++ src/apps/mplayerc/res/mplayerc.rc2	(working copy)
+@@ -104,6 +104,8 @@
+ IDF_LOGO1                        FILE                    "res\\logo.1.png"
+ IDF_LOGO2                        FILE                    "res\\logo.2.png"
+ IDF_LOGO3                        FILE                    "res\\logo.3.png"
++IDF_LOGO8                        FILE                    "res\\logo.cccp.png"
++IDF_LOGO9                        FILE                    "res\\logo.cccp.2.png"
+ #endif
+ 
+ W7_TOOLBAR                       PNG                     "res\\Toolbarw7.png"

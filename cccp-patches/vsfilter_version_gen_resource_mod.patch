@@ -1,0 +1,81 @@
+Index: include/SubWCRev.h
+===================================================================
+--- include/SubWCRev.h	(revision 2503)
++++ include/SubWCRev.h	(working copy)
+@@ -1 +1,6 @@
+ #define VERSION_REV $WCREV$
++
++#define ACTUAL_BUILD_YEAR "$WCNOW=%Y$"
++#define ACTUAL_BUILD_MONTH "$WCNOW=%m$"
++#define ACTUAL_BUILD_DAY "$WCNOW=%d$"
++#define ACTUAL_BUILD_TIME "$WCNOW=%X$"
+Index: src/filters/transform/VSFilter/DirectVobSubPropPage.cpp
+===================================================================
+--- src/filters/transform/VSFilter/DirectVobSubPropPage.cpp	(revision 2503)
++++ src/filters/transform/VSFilter/DirectVobSubPropPage.cpp	(working copy)
+@@ -801,7 +801,7 @@
+ 	case WM_INITDIALOG:
+ 	{
+ #ifdef _VSMOD
+-		SetDlgItemTextA( m_Dlg, IDC_VERSION, "DirectVobSub 2.40."MAKE_STR(VERSION_REV)"."MAKE_STR(VERSION_PATCH)" "MAKE_STR(VERSION_ARCH)", MOD\nCopyright 2001-2010 MPC-HC & VSFilterMod Teams" );
++		SetDlgItemTextA( m_Dlg, IDC_VERSION, "DirectVobSub 2.40."MAKE_STR(VERSION_REV)"."MAKE_STR(VERSION_PATCH)" "MAKE_STR(VERSION_ARCH)", MOD\nCopyright 2001-2010 MPC-HC && VSFilterMod Teams" );
+ #else
+ 		SetDlgItemTextA( m_Dlg, IDC_VERSION, "DirectVobSub 2.40."MAKE_STR(VERSION_REV)"."MAKE_STR(VERSION_PATCH)" "MAKE_STR(VERSION_ARCH)"\nCopyright 2001-2010 MPC-HC Team" );
+ #endif
+Index: src/filters/transform/VSFilter/resource.h
+===================================================================
+--- src/filters/transform/VSFilter/resource.h	(revision 2503)
++++ src/filters/transform/VSFilter/resource.h	(working copy)
+@@ -188,3 +188,6 @@
+ #define _APS_NEXT_SYMED_VALUE           103
+ #endif
+ #endif
++
++#define VSFILTER_VERSION_MAJOR          2
++#define VSFILTER_VERSION_MINOR          40
+Index: src/filters/transform/VSFilter/VSFilter.rc
+===================================================================
+--- src/filters/transform/VSFilter/VSFilter.rc	(revision 2503)
++++ src/filters/transform/VSFilter/VSFilter.rc	(working copy)
+@@ -47,8 +47,8 @@
+ //
+ 
+ VS_VERSION_INFO VERSIONINFO
+- FILEVERSION VERSION_MAJOR,VERSION_MINOR,VERSION_REV,VERSION_PATCH
+- PRODUCTVERSION VERSION_MAJOR,VERSION_MINOR,VERSION_REV,VERSION_PATCH
++ FILEVERSION VSFILTER_VERSION_MAJOR,VSFILTER_VERSION_MINOR,VERSION_REV,VERSION_PATCH
++ PRODUCTVERSION VSFILTER_VERSION_MAJOR,VSFILTER_VERSION_MINOR,VERSION_REV,VERSION_PATCH
+  FILEFLAGSMASK 0x3fL
+ #ifdef _DEBUG
+  FILEFLAGS 0x1L
+@@ -66,12 +66,13 @@
+             VALUE "Comments", "http://sourceforge.net/projects/mpc-hc/"
+             VALUE "CompanyName", "MPC-HC Team"
+             VALUE "FileDescription", "VobSub & TextSub filter for DirectShow/VirtualDub/Avisynth"
+-            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
++            VALUE "FileVersion", MAKE_STR(VSFILTER_VERSION_MAJOR) "." MAKE_STR(VSFILTER_VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
+             VALUE "InternalName", "VSFilter"
+             VALUE "LegalCopyright", "Copyright (C) 2001-2010 see AUTHORS file"
+             VALUE "OriginalFilename", "VSFilter.dll"
+             VALUE "ProductName", "VSFilter"
+-            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
++            VALUE "ProductVersion", MAKE_STR(VSFILTER_VERSION_MAJOR) "." MAKE_STR(VSFILTER_VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
++            VALUE "SpecialBuild", "CCCP " ACTUAL_BUILD_YEAR "-" ACTUAL_BUILD_MONTH "-" ACTUAL_BUILD_DAY " " ACTUAL_BUILD_TIME "\0"
+         END
+     END
+     BLOCK "VarFileInfo"
+Index: update_version.bat
+===================================================================
+--- update_version.bat	(revision 2503)
++++ update_version.bat	(working copy)
+@@ -6,5 +6,9 @@
+ 
+ :NoSubWCRev
+ ECHO:NoSubWCRev
+-ECHO:#define VERSION_REV 0 > include\Version_rev.h
++ECHO:#define VERSION_REV 0              >  include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_YEAR 2010     >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_MONTH 1       >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_DAY 1         >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_TIME 00:00:00 >> include\Version_rev.h
+ COPY /Y src\apps\mplayerc\res\mpc-hc.exe.manifest.template src\apps\mplayerc\res\mpc-hc.exe.manifest

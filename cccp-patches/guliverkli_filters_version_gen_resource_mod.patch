@@ -1,0 +1,140 @@
+Index: include/SubWCRev.h
+===================================================================
+--- include/SubWCRev.h	(revision 2212)
++++ include/SubWCRev.h	(working copy)
+@@ -1 +1,6 @@
+ #define VERSION_REV $WCREV$
++
++#define ACTUAL_BUILD_YEAR "$WCNOW=%Y$"
++#define ACTUAL_BUILD_MONTH "$WCNOW=%m$"
++#define ACTUAL_BUILD_DAY "$WCNOW=%d$"
++#define ACTUAL_BUILD_TIME "$WCNOW=%X$"
+Index: src/filters/parser/FLVSplitter/FLVSplitter.rc
+===================================================================
+--- src/filters/parser/FLVSplitter/FLVSplitter.rc	(revision 2212)
++++ src/filters/parser/FLVSplitter/FLVSplitter.rc	(working copy)
+@@ -45,12 +45,13 @@
+             VALUE "Comments", "http://sourceforge.net/projects/mpc-hc/"
+             VALUE "CompanyName", "MPC-HC Team"
+             VALUE "FileDescription", "FLV Splitter"
+-            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
++            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
+             VALUE "InternalName", "FLV Splitter"
+             VALUE "LegalCopyright", "Copyright (C) 2002-2010 see AUTHORS file"
+             VALUE "OriginalFilename", "FLVSplitter.ax"
+             VALUE "ProductName", "FLV Splitter"
+-            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
++            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
++            VALUE "SpecialBuild", "CCCP " ACTUAL_BUILD_YEAR "-" ACTUAL_BUILD_MONTH "-" ACTUAL_BUILD_DAY " " ACTUAL_BUILD_TIME "\0"
+         END
+     END
+     BLOCK "VarFileInfo"
+Index: src/filters/parser/FLVSplitter/FLVSplitter.vcproj
+===================================================================
+--- src/filters/parser/FLVSplitter/FLVSplitter.vcproj	(revision 2212)
++++ src/filters/parser/FLVSplitter/FLVSplitter.vcproj	(working copy)
+@@ -257,6 +257,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+@@ -330,6 +331,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+@@ -405,6 +407,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+@@ -478,6 +481,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+Index: src/filters/transform/Mpeg2DecFilter/Mpeg2DecFilter.rc
+===================================================================
+--- src/filters/transform/Mpeg2DecFilter/Mpeg2DecFilter.rc	(revision 2212)
++++ src/filters/transform/Mpeg2DecFilter/Mpeg2DecFilter.rc	(working copy)
+@@ -71,12 +71,13 @@
+             VALUE "Comments", "http://sourceforge.net/projects/mpc-hc/"
+             VALUE "CompanyName", "MPC-HC Team"
+             VALUE "FileDescription", "MPEG-2 Decoder Filter for DirectShow"
+-            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
+-            VALUE "InternalName", " Mpeg2Dec Filter"
++            VALUE "FileVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
++            VALUE "InternalName", "Mpeg2Dec Filter"
+             VALUE "LegalCopyright", "Copyright (C) 2002-2010 see AUTHORS file"
+             VALUE "OriginalFilename", "Mpeg2DecFilter.ax"
+-            VALUE "ProductName", " Mpeg2Dec Filter"
+-            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) ", " MAKE_STR(VERSION_MINOR) ", " MAKE_STR(VERSION_REV) ", " MAKE_STR(VERSION_PATCH)
++            VALUE "ProductName", "Mpeg2Dec Filter"
++            VALUE "ProductVersion", MAKE_STR(VERSION_MAJOR) "." MAKE_STR(VERSION_MINOR) "." MAKE_STR(VERSION_REV) "." MAKE_STR(VERSION_PATCH) "\0"
++            VALUE "SpecialBuild", "CCCP " ACTUAL_BUILD_YEAR "-" ACTUAL_BUILD_MONTH "-" ACTUAL_BUILD_DAY " " ACTUAL_BUILD_TIME "\0"
+         END
+     END
+     BLOCK "VarFileInfo"
+Index: src/filters/transform/Mpeg2DecFilter/Mpeg2DecFilter.vcproj
+===================================================================
+--- src/filters/transform/Mpeg2DecFilter/Mpeg2DecFilter.vcproj	(revision 2212)
++++ src/filters/transform/Mpeg2DecFilter/Mpeg2DecFilter.vcproj	(working copy)
+@@ -29,6 +29,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+@@ -101,6 +102,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+@@ -167,6 +169,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+@@ -240,6 +243,7 @@
+ 			>
+ 			<Tool
+ 				Name="VCPreBuildEventTool"
++				CommandLine="cd ..\..\..\..\&#x0D;&#x0A;update_version.bat"
+ 			/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"
+Index: update_version.bat
+===================================================================
+--- update_version.bat	(revision 2212)
++++ update_version.bat	(working copy)
+@@ -6,5 +6,9 @@
+ 
+ :NoSubWCRev
+ ECHO:NoSubWCRev
+-ECHO:#define VERSION_REV 0 > include\Version_rev.h
++ECHO:#define VERSION_REV 0              >  include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_YEAR 2010     >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_MONTH 1       >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_DAY 1         >> include\Version_rev.h
++ECHO:#define ACTUAL_BUILD_TIME 00:00:00 >> include\Version_rev.h
+ COPY /Y src\apps\mplayerc\res\mpc-hc.exe.manifest.template src\apps\mplayerc\res\mpc-hc.exe.manifest

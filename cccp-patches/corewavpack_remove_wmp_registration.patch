@@ -1,0 +1,24 @@
+Index: WavPackDSSplitter/WavPackDSSplitter.cpp
+===================================================================
+--- WavPackDSSplitter/WavPackDSSplitter.cpp	(revision 7)
++++ WavPackDSSplitter/WavPackDSSplitter.cpp	(working copy)
+@@ -143,8 +143,8 @@
+ 	RegisterSourceFilterExtension(".wvc", CLSID_AsyncReader,
+ 		MEDIATYPE_Stream, MEDIASUBTYPE_WAVPACK_CORRECTION_Stream);
+ 
+-	RegisterWMPExtension("*.wv", "WavPack Audio Files (*.wv)",
+-		"WavPack Audio Files", "audio");
++	/*RegisterWMPExtension("*.wv", "WavPack Audio Files (*.wv)",
++		"WavPack Audio Files", "audio");*/
+ 
+     return AMovieDllRegisterServer2(TRUE);
+ }
+@@ -154,7 +154,7 @@
+ STDAPI DllUnregisterServer()
+ {
+     // Undo DllRegisterServer
+-	UnRegisterWMPExtension("*.wv");
++	//UnRegisterWMPExtension("*.wv");
+ 	UnRegisterSourceFilterExtension(".wvc");
+     UnRegisterSourceFilterExtension(".wv");
+ 	UnRegisterSourceFilterPattern(MEDIATYPE_Stream, MEDIASUBTYPE_WAVPACK_Stream);

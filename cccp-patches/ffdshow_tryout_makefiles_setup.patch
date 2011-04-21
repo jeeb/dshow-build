@@ -1,0 +1,306 @@
+Index: rebase/Makefile
+===================================================================
+--- rebase/Makefile	(revision 3611)
++++ rebase/Makefile	(working copy)
+@@ -2,7 +2,8 @@
+ 
+ SRCS=rebase.cpp
+ 
+-SEXE=../bin/rebase.exe
++SDIR=../bin
++SEXE=$(SDIR)/rebase.exe
+ 
+ GCCLIBS=-limagehlp
+ CLLIBS=imagehlp.lib
+Index: src/audioFilters/resample/libsamplerate/Makefile
+===================================================================
+--- src/audioFilters/resample/libsamplerate/Makefile	(revision 3611)
++++ src/audioFilters/resample/libsamplerate/Makefile	(working copy)
+@@ -5,7 +5,8 @@
+ 		src_sinc.c \
+ 		src_zoh.c
+ 
+-SLIB=../../../../bin/ff_samplerate.dll
++SDIR=../../../../bin
++SLIB=$(SDIR)/ff_samplerate.dll
+ DEF=ff_samplerate.def
+ 
+ include ../../../makefile_c.inc
+Index: src/codecs/faad/Makefile
+===================================================================
+--- src/codecs/faad/Makefile	(revision 3611)
++++ src/codecs/faad/Makefile	(working copy)
+@@ -40,7 +40,8 @@
+ 		drm_dec.c \
+ 		version.c
+ 
+-SLIB=../../../bin/ff_libfaad2.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/ff_libfaad2.dll
+ DEF=ff_libfaad2.def
+ 
+ include ../../makefile_c.inc
+Index: src/codecs/liba52/Makefile
+===================================================================
+--- src/codecs/liba52/Makefile	(revision 3611)
++++ src/codecs/liba52/Makefile	(working copy)
+@@ -6,7 +6,8 @@
+ 		imdct.c \
+ 		parse.c
+ 
+-SLIB=../../../bin/ff_liba52.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/ff_liba52.dll
+ DEF=ff_liba52.def
+ 
+ include ../../makefile_c.inc
+Index: src/codecs/libdts/Makefile
+===================================================================
+--- src/codecs/libdts/Makefile	(revision 3611)
++++ src/codecs/libdts/Makefile	(working copy)
+@@ -4,7 +4,8 @@
+ 		downmix.c \
+ 		parse.c
+ 
+-SLIB=../../../bin/ff_libdts.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/ff_libdts.dll
+ DEF=ff_libdts.def
+ 
+ include ../../makefile_c.inc
+Index: src/codecs/libmad/Makefile
+===================================================================
+--- src/codecs/libmad/Makefile	(revision 3611)
++++ src/codecs/libmad/Makefile	(working copy)
+@@ -12,7 +12,8 @@
+ 		timer.c \
+ 		version.c
+ 
+-SLIB=../../../bin/ff_libmad.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/ff_libmad.dll
+ DEF=ff_libmad.def
+ 
+ include ../../makefile_c.inc
+Index: src/codecs/libmpeg2/Makefile
+===================================================================
+--- src/codecs/libmpeg2/Makefile	(revision 3611)
++++ src/codecs/libmpeg2/Makefile	(working copy)
+@@ -16,7 +16,8 @@
+ 		libmpeg2/cpu_accel.c \
+ 		version.c
+ 
+-SLIB=../../../bin/libmpeg2_ff.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/libmpeg2_ff.dll
+ DEF=libmpeg2_ff.def
+ 
+ # enable SSE because compilation fails without it
+Index: src/codecs/tremor/Makefile
+===================================================================
+--- src/codecs/tremor/Makefile	(revision 3611)
++++ src/codecs/tremor/Makefile	(working copy)
+@@ -15,7 +15,8 @@
+ 		bitwise.c \
+ 		framing.c
+ 
+-SLIB=../../../bin/ff_tremor.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/ff_tremor.dll
+ DEF=ff_tremor.def
+ 
+ include ../../makefile_c.inc
+Index: src/codecs/x264/Makefile
+===================================================================
+--- src/codecs/x264/Makefile	(revision 3611)
++++ src/codecs/x264/Makefile	(working copy)
+@@ -54,7 +54,8 @@
+ 	GCCLIBS=../../../bin/lib_x64/libpthreadGC2.a -lws2_32
+ endif
+ 
+-SLIB=../../../bin/ff_x264.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/ff_x264.dll
+ DEF=ff_x264.def
+ 
+ include ../../makefile_c.inc
+Index: src/codecs/xvidcore/Makefile
+===================================================================
+--- src/codecs/xvidcore/Makefile	(revision 3611)
++++ src/codecs/xvidcore/Makefile	(working copy)
+@@ -87,7 +87,8 @@
+ 	YASMFLAGS+=-DARCH_IS_X86_64 -DARCH_IS_64BIT
+ endif
+ 
+-SLIB=../../../bin/xvidcore.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/xvidcore.dll
+ DEF=xvid.def
+ 
+ include ../../makefile_c.inc
+Index: src/ffmpeg-mt/Makefile
+===================================================================
+--- src/ffmpeg-mt/Makefile	(revision 3611)
++++ src/ffmpeg-mt/Makefile	(working copy)
+@@ -87,7 +87,8 @@
+     GCCLIBS=../../bin/lib_x86/libpthreadGC2.a -lws2_32
+ endif
+ 
+-SLIB=../../bin/ffmpegmt.dll
++SDIR=../../bin
++SLIB=$(SDIR)/ffmpegmt.dll
+ DEF=libavcodec.def
+ 
+ include ../makefile_c.inc
+Index: src/ffmpeg/Makefile
+===================================================================
+--- src/ffmpeg/Makefile	(revision 3611)
++++ src/ffmpeg/Makefile	(working copy)
+@@ -313,7 +313,8 @@
+     CFLAGS+=-DARCH_X86_32
+ endif
+ 
+-SLIB=../../bin/libavcodec.dll
++SDIR=../../bin
++SLIB=$(SDIR)/libavcodec.dll
+ DEF=libavcodec.def
+ 
+ include ../makefile_c.inc
+Index: src/ffSpkCfg/Makefile
+===================================================================
+--- src/ffSpkCfg/Makefile	(revision 3611)
++++ src/ffSpkCfg/Makefile	(working copy)
+@@ -2,7 +2,8 @@
+ 
+ SRCS=ffSpkCfg.cpp
+ 
+-SLIB=../../bin/ffSpkCfg.dll
++SDIR=../../bin
++SLIB=$(SDIR)/ffSpkCfg.dll
+ DEF=ffSpkCfg.def
+ 
+ GCCLIBS=-ldsound
+Index: src/imgFilters/KernelDeint/Makefile
+===================================================================
+--- src/imgFilters/KernelDeint/Makefile	(revision 3611)
++++ src/imgFilters/KernelDeint/Makefile	(working copy)
+@@ -2,7 +2,8 @@
+        
+ SRCS=ff_kernelDeint.cpp
+ 
+-SLIB=../../../bin/ff_kernelDeint.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/ff_kernelDeint.dll
+ DEF=ff_kernelDeint.def
+ 
+ GCCLIBS=-lstdc++
+Index: src/imgFilters/TomsMoComp/Makefile
+===================================================================
+--- src/imgFilters/TomsMoComp/Makefile	(revision 3611)
++++ src/imgFilters/TomsMoComp/Makefile	(working copy)
+@@ -2,7 +2,8 @@
+        
+ SRCS=TomsMoComp.cpp
+ 
+-SLIB=../../../bin/TomsMoComp_ff.dll
++SDIR=../../../bin
++SLIB=$(SDIR)/TomsMoComp_ff.dll
+ DEF=TomsMoComp_ff.def
+ 
+ GCCLIBS=-lstdc++
+Index: src/Makefile
+===================================================================
+--- src/Makefile	(revision 3611)
++++ src/Makefile	(working copy)
+@@ -1,8 +1,12 @@
+ ALLDLLS=LIBMPEG2 LIBMAD LIBFAAD2 X264 XVIDCORE LIBDTS SAMPLERATE TREMOR \
+-		TOMSMOCOMP KDINT UNRAR LIBA52 FFMPEG FFMPEGMT
++		TOMSMOCOMP KDINT UNRAR LIBA52 FFMPEG FFMPEGMT REBASE
+ 
+-FFDLLS=FFMPEG FFMPEGMT X264 XVIDCORE
++FFDLLS=FFMPEG FFMPEGMT X264 XVIDCORE REBASE
+ 
++CCCPDLLS=LIBMAD LIBFAAD2 LIBDTS KDINT LIBA52 FFMPEG FFMPEGMT
++
++CCCPOTHERDLLS=THEORA X264 XVIDCORE TREMOR
++
+ ALLS=../bin/libavcodec.dll \
+      ../bin/ffmpegmt.dll \
+      ../bin/libmpeg2_ff.dll \
+@@ -16,7 +20,8 @@
+      ../bin/TomsMoComp_ff.dll \
+      ../bin/ff_kernelDeint.dll \
+      ../bin/ff_unrar.dll \
+-     ../bin/ff_liba52.dll
++     ../bin/ff_liba52.dll \
++     ../bin/rebase.exe
+ 
+ .all: $(ALLDLLS)
+ 
+@@ -24,6 +29,12 @@
+ 
+ ALL: $(ALLDLLS)
+ 
++CCCP: $(CCCPDLLS) REBASE
++
++CCCPOTHER: $(CCCPOTHERDLLS) REBASE
++
++CCCPALL: $(CCCPDLLS) $(CCCPOTHERDLLS) REBASE
++
+ ../bin/libavcodec.dll:
+ 	$(MAKE) -C ffmpeg
+ FFMPEG:
+@@ -94,6 +105,11 @@
+ UNRAR:
+ 	$(MAKE) -C ../unrar
+ 
++../bin/rebase.exe:
++	$(MAKE) -C ../rebase
++REBASE:
++	$(MAKE) -C ../rebase
++
+ clean:	
+ 	$(MAKE) -C ffmpeg clean
+ 	$(MAKE) -C ffmpeg-mt clean
+@@ -109,6 +125,7 @@
+ 	$(MAKE) -C imgFilters/TomsMoComp clean
+ 	$(MAKE) -C imgFilters/KernelDeint clean
+ 	$(MAKE) -C ../unrar clean
++	$(MAKE) -C ../rebase clean
+ 
+ distclean:
+ 	$(MAKE) -C ffmpeg distclean
+@@ -125,5 +142,6 @@
+ 	$(MAKE) -C imgFilters/TomsMoComp distclean
+ 	$(MAKE) -C imgFilters/KernelDeint distclean
+ 	$(MAKE) -C ../unrar distclean
++	$(MAKE) -C ../rebase distclean
+ 
+ .PHONY: $(FFDLLS)
+Index: src/makefile_c.inc
+===================================================================
+--- src/makefile_c.inc	(revision 3611)
++++ src/makefile_c.inc	(working copy)
+@@ -16,7 +16,7 @@
+ else
+     TARGET_OS=i686-pc-mingw32
+     CFLAGS+=-DWIN32 -D_WIN32 -D__MINGW32__
+-    OPTFLAGS+=-O2 -march=i686 -mmmx
++    OPTFLAGS+=-Os -march=i686 -mmmx
+ endif
+ 
+ CFLAGS+=-mno-cygwin -mdll -mthreads -pipe
+Index: unrar/Makefile
+===================================================================
+--- unrar/Makefile	(revision 3611)
++++ unrar/Makefile	(working copy)
+@@ -37,7 +37,8 @@
+ 
+ EXCEPTIONS=1
+ 
+-SLIB=../bin/ff_unrar.dll
++SDIR=../bin
++SLIB=$(SDIR)/ff_unrar.dll
+ DEF=dll.def
+ 
+ GCCLIBS=-lstdc++
