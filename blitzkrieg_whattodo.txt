@@ -1,0 +1,46 @@
+For the next beta:
+    * Update ffdshow-tryouts
+        - See trunk changes to default settings.
+        - Switch AAC, AC3, DTS, MP3 to lavc.
+        - Test >2ch wavpack.
+        - Check if NV12 is needed for anything
+        - Enable yadif std rate deinterlacing
+          for interlaced sources.
+        - Otherwise everything as usual.
+        
+        - Is the revert of r2997 really needed?
+        
+        (Should be mostly ready for 64bit,
+         libav is mostly green on win64)
+    * Update MPC-HC
+        - See trunk changes to default settings.
+        - Otherwise same as usual.
+        
+        (One of the problems for a 64bit pack,
+         lack of developers and old ffmpeg make
+         this somewhat of a dirty bomb)
+    * Update Haali
+        - Make Haali only default for MKV
+    * FLVSplitter
+        - Has served its purpose
+        - Can be left as backup
+    * LAVSplitter (and LAVAudio)
+        - A prominent open source splitter.
+        - Enable for FLV, MP4, MPEG-TS.
+        - Should work better than Haali, but
+          testing needed.
+        - Certain audio formats with ffdshow-tryouts
+          need specific hacks, enable LAVAudio for
+          those when used with LAVSplitter.
+    * MPEG2DecFilter
+        - As-is, just update with MPC-HC
+    * VSFilter
+        - Check if basefilter reverts are still needed.
+    * CoreWavPack
+        - As-is, if wavpack works fine with ffdshow-tryouts
+          remove from defaults.
+    
+    * Installer (inno)
+        
+    
+    * Settings app (nullsoft)
