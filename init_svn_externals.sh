@@ -3,6 +3,12 @@
 # Make a better check some day
 #[ -d mpc-hc -a -d ffdshow-tryouts ] || git submodule update --init
 
+# How to check what the svn repo has ?
+#
+# svn propget svn:externals https://mpc-hc.svn.sourceforge.net/svnroot/mpc-hc/trunk
+# svn propget svn:externals https://ffdshow-tryout.svn.sourceforge.net/svnroot/ffdshow-tryout/trunk
+
+
 git submodule update --init
 
 cd mpc-hc
