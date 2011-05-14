@@ -1,0 +1,22 @@
+diff -uarN src/apps/mplayerc/mplayerc.rc src/apps/mplayerc-new/mplayerc.rc
+--- src/apps/mplayerc/mplayerc.rc	2010-03-26 13:23:57 -0700
++++ src/apps/mplayerc-new/mplayerc.rc	2010-04-02 02:24:20 -0700
+@@ -1539,6 +1539,7 @@
+ // Icon with lowest ID value placed first to ensure application icon
+ // remains consistent on all systems.
+ IDR_MAINFRAME           ICON                    "res\\icon.ico"
++IDI_CCCP_ICON           ICON                    "res\\CCCP_Media.ico"
+ IDI_SINGLE              ICON                    "res\\single.ico"
+ IDI_MULTI               ICON                    "res\\multi.ico"
+ IDI_AUDIOCD             ICON                    "res\\Icon_41.ico"
+diff -uarN src/apps/mplayerc/resource.h src/apps/mplayerc-new/resource.h
+--- src/apps/mplayerc/resource.h	2010-03-14 23:27:44 -0700
++++ src/apps/mplayerc-new/resource.h	2010-04-02 02:24:20 -0700
+@@ -25,6 +25,7 @@
+ #define IDI_DVD                         302
+ #define IDI_AUDIOCD                     303
+ #define IDI_UNKNOWN                     304
++#define IDI_CCCP_ICON                   305
+ #define IDR_AVI_FILECOPY                400
+ #define IDR_HTML_INDEX                  500
+ #define IDR_HTML_404                    501
