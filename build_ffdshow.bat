@@ -5,6 +5,8 @@ SET MINGW32=C:\JEEB\msys\cross-mingw.gcc460.ml.20110422\i686-pc-mingw32
 SET MINGW64=C:\JEEB\msys\cross-mingw.gcc460.ml.20110422\x86_64-w64-mingw32
 SET PATH=%PATH%;%MINGW32%\bin;%MINGW64%\bin;%MSYS%\bin
 
+SET CC=gcc.exe
+
 call "%VS100COMNTOOLS%vsvars32.bat"
 
 cd ffdshow-tryouts
