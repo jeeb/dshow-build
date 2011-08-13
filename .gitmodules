@@ -7,3 +7,6 @@
 [submodule "mpc-hc"]
 	path = mpc-hc
 	url = git://github.com/jeeb/mpc-hc.git
+[submodule "lavfilters"]
+	path = lavfilters
+	url = https://code.google.com/p/lavfilters/
